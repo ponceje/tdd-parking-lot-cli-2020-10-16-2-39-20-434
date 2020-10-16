@@ -5,6 +5,13 @@ import java.util.Map;
 
 public class ParkingLot {
     private int max = 10;
+
+    public ParkingLot() {
+    }
+    public ParkingLot(int max) {
+        this.max = max;
+    }
+
     private final Map<ParkingTicket, Car> ticketCarMap = new HashMap<>();
     public ParkingTicket park(Car car){
         ParkingTicket ticket = new ParkingTicket(car);
@@ -17,17 +24,15 @@ public class ParkingLot {
     }
 
     public Car fetch(ParkingTicket parkingTicket){
+        if (parkingTicket == null){
+            throw new RuntimeException("Please provide your parking ticket");
+        }
+        if(!ticketCarMap.containsKey(parkingTicket)){
+            throw new RuntimeException("Unrecognize parking ticket");
+        }
         Car car = ticketCarMap.get(parkingTicket);
         ticketCarMap.remove(parkingTicket);
+
         return car;
-    }
-    public Map<ParkingTicket, Car> getTicketCarMap(){
-        return ticketCarMap;
-    }
-    public void setMaxCapacityParkingLot(int newMax){
-        this.max = newMax;
-    }
-    public int getMaxCapacityParkingLot(){
-        return max;
     }
 }
