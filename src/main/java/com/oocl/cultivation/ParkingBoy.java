@@ -9,4 +9,8 @@ public class ParkingBoy {
         ParkingTicket parkingTicket = new ParkingTicket();
         return parkingTicket;
     }
+
+    public Car fetch(ParkingTicket ticket){
+        return null;
+    }
 }
