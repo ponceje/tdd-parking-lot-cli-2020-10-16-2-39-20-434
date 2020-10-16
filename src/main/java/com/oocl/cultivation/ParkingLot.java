@@ -5,14 +5,15 @@ import java.util.Map;
 
 public class ParkingLot {
     private int max = 10;
+    private final Map<ParkingTicket, Car> ticketCarMap = new HashMap<>();
 
     public ParkingLot() {
     }
+
     public ParkingLot(int max) {
         this.max = max;
     }
 
-    private final Map<ParkingTicket, Car> ticketCarMap = new HashMap<>();
     public ParkingTicket park(Car car){
         ParkingTicket ticket = new ParkingTicket(car);
         if (ticketCarMap.size() < max) {
@@ -34,5 +35,13 @@ public class ParkingLot {
         ticketCarMap.remove(parkingTicket);
 
         return car;
+    }
+
+    public Map<ParkingTicket, Car> getTicketCarMap() {
+        return ticketCarMap;
+    }
+
+    public int getMax(){
+        return max;
     }
 }

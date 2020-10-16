@@ -6,17 +6,24 @@ import java.util.List;
 
 public class ParkingBoy {
     private ParkingLot parkingLot;
-    private List<ParkingLot> parkingLotList = new ArrayList<>();
+    private List<ParkingLot> parkingLotList;
 
-    public ParkingBoy(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
-    }
     public ParkingBoy(List<ParkingLot> parkingLotList){
         this.parkingLotList = parkingLotList;
     }
 
     public ParkingTicket park(Car car) {
+        parkingLot = getParkinglot(parkingLotList);
         return parkingLot.park(car);
+    }
+
+    private ParkingLot getParkinglot(List<ParkingLot> parkingLotList) {
+        for(ParkingLot lot: parkingLotList){
+            if(lot.getTicketCarMap().size()<lot.getMax()){
+                return lot;
+            }
+        }
+        throw new RuntimeException("Not enough position");
     }
 
     public Car fetch(ParkingTicket ticket) throws RuntimeException {
