@@ -1,6 +1,10 @@
 package com.oocl.cultivation;
 
 import org.junit.jupiter.api.Test;
+import sun.security.krb5.internal.Ticket;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -114,5 +118,23 @@ class ParkingBoyTest {
                 ()->{parkingBoy.park(car2); });
         //THEN
         assertSame("Not enough position", exception.getMessage());
+    }
+    @Test
+    public void should_return_car_ticket_when_parking_given_car_while_parking_lot_1_is_at_max_capacity_to_parking_boy(){
+        //GIVEN
+        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkinglot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkinglot2);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        parkingBoy.park(car1);
+
+        //WHEN
+        ParkingTicket ticket = parkingBoy.park(car2);
+        //THEN
+        assertNull(ticket);
     }
 }
