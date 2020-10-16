@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingBoy {
+    public static final String PLEASE_PROVIDE_YOUR_PARKING_TICKET = "Please provide your parking ticket";
+    public static final String NOT_ENOUGH_POSITION = "Not enough position";
     private ParkingLot parkingLot;
     private List<ParkingLot> parkingLotList;
 
@@ -23,13 +25,17 @@ public class ParkingBoy {
                 return lot;
             }
         }
-        throw new RuntimeException("Not enough position");
+        throw new RuntimeException(NOT_ENOUGH_POSITION);
     }
 
-    public Car fetch(ParkingTicket ticket) throws RuntimeException {
-        return parkingLot.fetch(ticket);
+    public Car fetch(ParkingTicket parkingTicket) throws RuntimeException {
+        if (parkingTicket != null){
+            return parkingLot.fetch(parkingTicket);
+        }
+        throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
     }
+
     public Car fetch(){
-        throw new RuntimeException("Please provide your parking ticket");
+        throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
     }
 }
