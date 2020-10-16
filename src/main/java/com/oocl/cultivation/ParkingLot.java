@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
+    private int max = 10;
     private final Map<ParkingTicket, Car> ticketCarMap = new HashMap<>();
     public ParkingTicket park(Car car){
         ParkingTicket ticket = new ParkingTicket(car);
-        if (ticketCarMap.size() < 10) {
+        if (ticketCarMap.size() < max) {
             ticketCarMap.put(ticket, car);
         } else {
-            ticket = null;
+            throw new RuntimeException("Not enough position");
         }
         return ticket;
     }
@@ -22,5 +23,11 @@ public class ParkingLot {
     }
     public Map<ParkingTicket, Car> getTicketCarMap(){
         return ticketCarMap;
+    }
+    public void setMaxCapacityParkingLot(int newMax){
+        this.max = newMax;
+    }
+    public int getMaxCapacityParkingLot(){
+        return max;
     }
 }
