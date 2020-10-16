@@ -15,6 +15,6 @@ public class ParkingBoy {
         return parkingLot.fetch(ticket);
     }
     public Car fetch(){
-        return null;
+        throw new RuntimeException("Please provide your parking ticket");
     }
 }
