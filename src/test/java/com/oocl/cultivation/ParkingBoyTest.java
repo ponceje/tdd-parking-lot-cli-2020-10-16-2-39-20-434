@@ -89,4 +89,36 @@ class ParkingBoyTest {
         //THEN
         assertSame(null, fetchCarAgain);
     }
+    @Test
+    public void should_return_no_ticket_when_parking_given_car_while_parking_lot_is_at_max_capacity_to_parking_boy(){
+        //GIVEN
+        Car car1 = new Car();
+        Car car2 = new Car();
+        Car car3 = new Car();
+        Car car4 = new Car();
+        Car car5 = new Car();
+        Car car6 = new Car();
+        Car car7 = new Car();
+        Car car8 = new Car();
+        Car car9 = new Car();
+        Car car10 = new Car();
+        Car car11 = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        parkingBoy.park(car1);
+        parkingBoy.park(car2);
+        parkingBoy.park(car3);
+        parkingBoy.park(car4);
+        parkingBoy.park(car5);
+        parkingBoy.park(car6);
+        parkingBoy.park(car7);
+        parkingBoy.park(car8);
+        parkingBoy.park(car9);
+        parkingBoy.park(car10);
+
+        //WHEN
+        ParkingTicket ticket = parkingBoy.park(car11);
+
+        //THEN
+        assertSame(null,ticket);
+    }
 }
