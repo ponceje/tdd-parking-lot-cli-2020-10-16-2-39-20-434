@@ -6,6 +6,7 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        return null;
+        ParkingTicket parkingTicket = new ParkingTicket();
+        return parkingTicket;
     }
 }
