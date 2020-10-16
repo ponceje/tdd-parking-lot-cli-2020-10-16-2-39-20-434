@@ -1,7 +1,6 @@
 package com.oocl.cultivation;
 
 import org.junit.jupiter.api.Test;
-import sun.security.krb5.internal.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,9 @@ class ParkingBoyTest {
     public void should_return_a_parking_ticket_when_parking_given_a_car_to_parking_boy() {
         //GIVEN
         Car car = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
 
         //WHEN
         ParkingTicket ticket = parkingBoy.park(car);
@@ -25,7 +26,9 @@ class ParkingBoyTest {
     public void should_return_a_car_when_fetching_given_a_parking_ticket_to_parking_boy(){
         //GIVEN
         Car car = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingTicket ticket = parkingBoy.park(car);
 
         //WHEN
@@ -39,7 +42,9 @@ class ParkingBoyTest {
         //GIVEN
         Car car1 = new Car();
         Car car2 = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingTicket ticket1 = parkingBoy.park(car1);
         ParkingTicket ticket2 = parkingBoy.park(car2);
 
@@ -55,7 +60,9 @@ class ParkingBoyTest {
     public void should_return_exception_when_fetching_given_wrong_parking_ticket_to_parking_boy(){
         //GIVEN
         Car car = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         parkingBoy.park(car);
         ParkingTicket wrongTicket = new ParkingTicket();
 
@@ -69,7 +76,9 @@ class ParkingBoyTest {
     public void should_return_exception_when_fetching_given_no_ticket_to_parking_boy(){
         //GIVEN
         Car car = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         parkingBoy.park(car);
 
         //WHEN
@@ -82,7 +91,9 @@ class ParkingBoyTest {
     public void should_return_exception_when_fetching_given_empty_ticket_to_parking_boy(){
         //GIVEN
         Car car = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         parkingBoy.park(car);
 
         //WHEN
@@ -95,7 +106,9 @@ class ParkingBoyTest {
     public void should_return_exception_when_fetching_given_used_parking_ticket_to_parking_boy(){
         //GIVEN
         Car car = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         ParkingTicket ticket = parkingBoy.park(car);
         parkingBoy.fetch(ticket);
 
@@ -110,7 +123,9 @@ class ParkingBoyTest {
         //GIVEN
         Car car1 = new Car();
         Car car2 = new Car();
-        ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot(1));
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         parkingBoy.park(car1);
 
         //WHEN
@@ -122,7 +137,7 @@ class ParkingBoyTest {
     @Test
     public void should_return_car_ticket_when_parking_given_car_while_parking_lot_1_is_at_max_capacity_to_parking_boy(){
         //GIVEN
-        ParkingLot parkingLot1 = new ParkingLot();
+        ParkingLot parkingLot1 = new ParkingLot(1);
         ParkingLot parkinglot2 = new ParkingLot();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot1);
@@ -135,6 +150,6 @@ class ParkingBoyTest {
         //WHEN
         ParkingTicket ticket = parkingBoy.park(car2);
         //THEN
-        assertNull(ticket);
+        assertNotNull(ticket);
     }
 }
