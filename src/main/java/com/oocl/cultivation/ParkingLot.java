@@ -7,7 +7,11 @@ public class ParkingLot {
     private final Map<ParkingTicket, Car> ticketCarMap = new HashMap<>();
     public ParkingTicket park(Car car){
         ParkingTicket ticket = new ParkingTicket(car);
-        ticketCarMap.put(ticket,car);
+        if (ticketCarMap.size() < 10) {
+            ticketCarMap.put(ticket, car);
+        } else {
+            ticket = null;
+        }
         return ticket;
     }
 
