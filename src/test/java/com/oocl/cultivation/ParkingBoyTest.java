@@ -75,7 +75,7 @@ class ParkingBoyTest {
         assertSame("Please provide your parking ticket", exception.getMessage());
     }
     @Test
-    public void should_return_no_car_when_fetching_given_used_parking_ticket_to_parking_boy(){
+    public void should_return_exception_when_fetching_given_used_parking_ticket_to_parking_boy(){
         //GIVEN
         Car car = new Car();
         ParkingBoy parkingBoy = new ParkingBoy(new ParkingLot());
@@ -83,10 +83,10 @@ class ParkingBoyTest {
         parkingBoy.fetch(ticket);
 
         //WHEN
-        Car fetchCarAgain = parkingBoy.fetch(ticket);
-
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                ()->{parkingBoy.fetch(ticket); });
         //THEN
-        assertSame(null, fetchCarAgain);
+        assertSame("Unrecognize parking ticket", exception.getMessage());
     }
     @Test
     public void should_return_no_ticket_when_parking_given_car_while_parking_lot_is_at_max_capacity_to_parking_boy(){
