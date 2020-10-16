@@ -12,6 +12,9 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket ticket) throws RuntimeException {
+        if (ticket == null){
+            throw new RuntimeException("Please provide your parking ticket");
+        }
         if(!parkingLot.getTicketCarMap().containsKey(ticket)){
             throw new RuntimeException("Unrecognize parking ticket");
         }
