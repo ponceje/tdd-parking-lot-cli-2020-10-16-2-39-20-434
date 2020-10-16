@@ -6,4 +6,7 @@ public class ParkingTicket {
     public ParkingTicket(Car car) {
         this.car = car;
     }
+    public ParkingTicket(){
+
+    }
 }
