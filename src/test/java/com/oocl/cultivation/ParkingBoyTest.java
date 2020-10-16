@@ -89,7 +89,7 @@ class ParkingBoyTest {
         assertSame("Unrecognize parking ticket", exception.getMessage());
     }
     @Test
-    public void should_return_no_ticket_when_parking_given_car_while_parking_lot_is_at_max_capacity_to_parking_boy(){
+    public void should_return_exception_when_parking_given_car_while_parking_lot_is_at_max_capacity_to_parking_boy(){
         //GIVEN
         Car car1 = new Car();
         Car car2 = new Car();
@@ -115,9 +115,9 @@ class ParkingBoyTest {
         parkingBoy.park(car10);
 
         //WHEN
-        ParkingTicket ticket = parkingBoy.park(car11);
-
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                ()->{parkingBoy.park(car11); });
         //THEN
-        assertSame(null,ticket);
+        assertSame("Not enough position", exception.getMessage());
     }
 }
