@@ -20,4 +20,7 @@ public class ParkingLot {
         ticketCarMap.remove(parkingTicket);
         return car;
     }
+    public Map<ParkingTicket, Car> getTicketCarMap(){
+        return ticketCarMap;
+    }
 }
