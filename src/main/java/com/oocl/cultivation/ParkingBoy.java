@@ -17,7 +17,7 @@ public class ParkingBoy {
         return lot.park(car);
     }
 
-    private ParkingLot getParkinglot(List<ParkingLot> parkingLotList) {
+    public ParkingLot getParkinglot(List<ParkingLot> parkingLotList) {
         for(ParkingLot lot: parkingLotList){
             if(lot.getTicketCarMap().size()!=lot.getMax()){
                 return lot;

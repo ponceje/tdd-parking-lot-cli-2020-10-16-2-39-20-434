@@ -28,7 +28,7 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         ParkingTicket ticket = smartParkingBoy.park(car);
 
         //WHEN
@@ -44,7 +44,7 @@ class SuperSmartParkingBoyTest {
         Car car2 = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         ParkingTicket ticket1 = smartParkingBoy.park(car1);
         ParkingTicket ticket2 = smartParkingBoy.park(car2);
 
@@ -62,7 +62,7 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         smartParkingBoy.park(car);
         ParkingTicket wrongTicket = new ParkingTicket();
 
@@ -78,7 +78,7 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         smartParkingBoy.park(car);
 
         //WHEN
@@ -93,7 +93,7 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         smartParkingBoy.park(car);
 
         //WHEN
@@ -108,7 +108,7 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         ParkingTicket ticket = smartParkingBoy.park(car);
         smartParkingBoy.fetch(ticket);
 
@@ -125,7 +125,7 @@ class SuperSmartParkingBoyTest {
         Car car2 = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(1));
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         smartParkingBoy.park(car1);
 
         //WHEN
@@ -150,7 +150,7 @@ class SuperSmartParkingBoyTest {
         Car car6 = new Car();
         Car car7 = new Car();
         Car car8 = new Car();
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
         smartParkingBoy.park(car1);
         smartParkingBoy.park(car2);
         smartParkingBoy.park(car3);
@@ -162,7 +162,7 @@ class SuperSmartParkingBoyTest {
         //WHEN
         smartParkingBoy.park(car8);
         //THEN
-        assertEquals(5,parkingLot1.getTicketCarMap().size());
-        assertEquals(4,parkinglot2.getTicketCarMap().size());
+        assertEquals(3,parkingLot1.getTicketCarMap().size());
+        assertEquals(6,parkinglot2.getTicketCarMap().size());
     }
 }
