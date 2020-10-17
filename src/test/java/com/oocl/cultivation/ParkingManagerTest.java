@@ -189,7 +189,7 @@ class ParkingManagerTest {
         assertEquals(1,parkinglot2.getTicketCarMap().size());
     }
     @Test
-    public void should_parking_lot_size_1_when_command_parking_given_car_while_parking_lot_1_is_at_max_capacity_from_parking_manager_to_super_smart_parking_boy(){
+    public void should_return_correct_parking_lot_size_when_command_parking_given_car_while_parking_lot_1_is_at_max_capacity_from_parking_manager_to_super_smart_parking_boy(){
         //GIVEN
         ParkingLot parkingLot1 = new ParkingLot(10);
         ParkingLot parkinglot2 = new ParkingLot(20);
@@ -214,6 +214,22 @@ class ParkingManagerTest {
         assertEquals(3,parkingLot1.getTicketCarMap().size());
         assertEquals(5,parkinglot2.getTicketCarMap().size());
     }
+    @Test
+    public void should_return_a_parking_ticket_when_parking_given_a_car_to_parking_manager() {
+        //GIVEN
+        Car car = new Car();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingManager parkingManager = new ParkingManager(parkingLots);
+
+        //WHEN
+        ParkingTicket ticket = parkingManager.park(car);
+
+        //THEN
+        assertNotNull(ticket);
+    }
+    
+
 
 
 }
