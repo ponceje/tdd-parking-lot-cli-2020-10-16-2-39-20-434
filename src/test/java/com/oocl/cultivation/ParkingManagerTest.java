@@ -228,8 +228,19 @@ class ParkingManagerTest {
         //THEN
         assertNotNull(ticket);
     }
-    
+    @Test
+    public void should_return_a_car_when_fetching_given_a_parking_ticket_to_parking_manager(){
+        //GIVEN
+        Car car = new Car();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingManager parkingManager = new ParkingManager(parkingLots);
+        ParkingTicket ticket = parkingManager.park(car);
 
+        //WHEN
+        Car fetchedCar = parkingManager.fetch(ticket);
 
-
+        //THEN
+        assertSame(car, fetchedCar);
+    }
 }
