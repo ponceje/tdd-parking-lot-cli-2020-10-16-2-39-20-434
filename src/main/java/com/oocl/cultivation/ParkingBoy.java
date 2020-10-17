@@ -1,16 +1,11 @@
 package com.oocl.cultivation;
 
-
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collector;
 
 public class ParkingBoy {
     public static final String PLEASE_PROVIDE_YOUR_PARKING_TICKET = "Please provide your parking ticket";
     public static final String NOT_ENOUGH_POSITION = "Not enough position";
-    private ParkingLot parkingLot;
+    public static final String UNRECOGNIZE_PARKING_TICKET = "Unrecognize parking ticket";
     private List<ParkingLot> parkingLotList;
 
     public ParkingBoy(List<ParkingLot> parkingLotList){
@@ -39,7 +34,7 @@ public class ParkingBoy {
                     return lot.fetch(parkingTicket);
                 }
             }
-            throw new RuntimeException("Unrecognize parking ticket");
+            throw new RuntimeException(UNRECOGNIZE_PARKING_TICKET);
         }
         throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
     }
@@ -47,6 +42,7 @@ public class ParkingBoy {
     public Car fetch(){
         throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
     }
+
     public List<ParkingLot> getParkingLotList(){
         return parkingLotList;
     }

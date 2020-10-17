@@ -7,14 +7,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SuperSmartparkingBoyTest {
+class SuperSmartParkingBoyTest {
     @Test
     public void should_return_a_parking_ticket_when_parking_given_a_car_to_parking_boy() {
         //GIVEN
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SuperSmartparkingBoy smartParkingBoy = new SuperSmartparkingBoy(parkingLots);
+        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
 
         //WHEN
         ParkingTicket ticket = smartParkingBoy.park(car);

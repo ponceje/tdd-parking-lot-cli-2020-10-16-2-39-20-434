@@ -3,8 +3,8 @@ package com.oocl.cultivation;
 import java.util.Comparator;
 import java.util.List;
 
-public class SuperSmartparkingBoy extends ParkingBoy{
-    public SuperSmartparkingBoy(List<ParkingLot> parkingLotList) {
+public class SuperSmartParkingBoy extends ParkingBoy{
+    public SuperSmartParkingBoy(List<ParkingLot> parkingLotList) {
         super(parkingLotList);
     }
     public ParkingTicket park(Car car) {
@@ -12,9 +12,8 @@ public class SuperSmartparkingBoy extends ParkingBoy{
         return lot.park(car);
     }
     private ParkingLot getParkinglot(List<ParkingLot> parkingLotList) {
-        ParkingLot lot = parkingLotList.stream().min(Comparator.comparing(ParkingLot::getRate))
+        return parkingLotList.stream().min(Comparator.comparing(ParkingLot::getRate))
                 .filter(c -> c.getTickatCarMapSize()!=c.getMax())
                 .orElseThrow(() -> new RuntimeException(NOT_ENOUGH_POSITION));
-        return lot;
     }
 }
