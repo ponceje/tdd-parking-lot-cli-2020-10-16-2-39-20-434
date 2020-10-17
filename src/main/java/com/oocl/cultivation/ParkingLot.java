@@ -14,15 +14,12 @@ public class ParkingLot {
     }
 
     public ParkingTicket park(Car car){
-        ParkingTicket ticket = new ParkingTicket();
-        ticketCarMap.put(ticket, car);
-        return ticket;
+            ParkingTicket ticket = new ParkingTicket();
+            ticketCarMap.put(ticket, car);
+            return ticket;
     }
 
     public Car fetch(ParkingTicket parkingTicket){
-        if(!ticketCarMap.containsKey(parkingTicket)){
-            throw new RuntimeException("Unrecognize parking ticket");
-        }
         Car car = ticketCarMap.get(parkingTicket);
         ticketCarMap.remove(parkingTicket);
         return car;
@@ -32,7 +29,14 @@ public class ParkingLot {
         return ticketCarMap;
     }
 
+    public int getTickatCarMapSize(){
+        return ticketCarMap.size();
+    }
+
     public int getMax(){
         return max;
+    }
+    public int getRate(){
+        return ticketCarMap.size()/max;
     }
 }

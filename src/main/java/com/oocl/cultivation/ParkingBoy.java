@@ -3,6 +3,7 @@ package com.oocl.cultivation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ParkingBoy {
     public static final String PLEASE_PROVIDE_YOUR_PARKING_TICKET = "Please provide your parking ticket";
@@ -21,7 +22,7 @@ public class ParkingBoy {
 
     private ParkingLot getParkinglot(List<ParkingLot> parkingLotList) {
         for(ParkingLot lot: parkingLotList){
-            if(lot.getTicketCarMap().size()<lot.getMax()){
+            if(lot.getTicketCarMap().size()!=lot.getMax()){
                 return lot;
             }
         }
@@ -35,11 +36,15 @@ public class ParkingBoy {
                     return lot.fetch(parkingTicket);
                 }
             }
+            throw new RuntimeException("Unrecognize parking ticket");
         }
         throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
     }
 
     public Car fetch(){
         throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
+    }
+    public List<ParkingLot> getParkingLotList(){
+        return parkingLotList;
     }
 }
