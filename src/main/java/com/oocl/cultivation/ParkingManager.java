@@ -10,7 +10,11 @@ public class ParkingManager extends ParkingBoy{
         super(parkingLotList);
     }
 
+    public void setManageList(List<ParkingBoy> parkingBoys){
+        this.manageList=parkingBoys;
+    }
+
     public List<ParkingBoy> getManageList() {
-        return null;
+        return manageList;
     }
 }
