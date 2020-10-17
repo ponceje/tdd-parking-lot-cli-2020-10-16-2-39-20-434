@@ -19,6 +19,7 @@ public class ParkingManager extends ParkingBoy{
     }
 
     public ParkingTicket commandPark(ParkingBoy parkingBoy, Car car) {
-        return null;
+        ParkingTicket parkingTicket= parkingBoy.park(car);
+        return parkingTicket;
     }
 }
