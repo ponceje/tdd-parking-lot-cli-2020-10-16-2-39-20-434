@@ -32,7 +32,7 @@ class ParkingManagerTest {
         parkingLotForParkingManager.add(new ParkingLot());
 
         ParkingManager parkingManager = new ParkingManager(parkingLotForParkingManager);
-
+        parkingManager.setManageList(parkingBoys);
         //WHEN
         List<ParkingBoy> getManageList = parkingManager.getManageList();
 
