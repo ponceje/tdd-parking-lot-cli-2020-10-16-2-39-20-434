@@ -15,8 +15,8 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        parkingLot = getParkinglot(parkingLotList);
-        return parkingLot.park(car);
+        ParkingLot lot = getParkinglot(parkingLotList);
+        return lot.park(car);
     }
 
     private ParkingLot getParkinglot(List<ParkingLot> parkingLotList) {
@@ -30,7 +30,11 @@ public class ParkingBoy {
 
     public Car fetch(ParkingTicket parkingTicket) throws RuntimeException {
         if (parkingTicket != null){
-            return parkingLot.fetch(parkingTicket);
+            for (ParkingLot lot: parkingLotList) {
+                if(lot.getTicketCarMap().containsKey(parkingTicket)){
+                    return lot.fetch(parkingTicket);
+                }
+            }
         }
         throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
     }
