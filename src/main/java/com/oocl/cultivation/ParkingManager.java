@@ -22,4 +22,9 @@ public class ParkingManager extends ParkingBoy{
         ParkingTicket parkingTicket= parkingBoy.park(car);
         return parkingTicket;
     }
+
+    public static Car commandFetch(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
+        return null;
+    }
+
 }
