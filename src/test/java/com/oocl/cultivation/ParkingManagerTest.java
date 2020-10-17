@@ -97,7 +97,7 @@ class ParkingManagerTest {
         ParkingTicket parkingTicket = parkingManager.commandPark(parkingBoy, car);
 
         //WHEN
-        Car fetchedCar = ParkingManager.commandFetch(parkingBoy, parkingTicket);
+        Car fetchedCar = parkingManager.commandFetch(parkingBoy, parkingTicket);
 
         //THEN
         assertEquals(car,fetchedCar);

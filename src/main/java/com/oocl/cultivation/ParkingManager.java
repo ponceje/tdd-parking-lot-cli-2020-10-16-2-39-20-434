@@ -23,8 +23,11 @@ public class ParkingManager extends ParkingBoy{
         return parkingTicket;
     }
 
-    public static Car commandFetch(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
-        return parkingBoy.fetch(parkingTicket);
+    public Car commandFetch(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
+        if(manageList.contains(parkingBoy)){
+            return parkingBoy.fetch(parkingTicket);
+        }
+        return null;
     }
 
 }
