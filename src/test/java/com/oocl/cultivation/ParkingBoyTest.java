@@ -135,7 +135,7 @@ class ParkingBoyTest {
         assertSame("Not enough position", exception.getMessage());
     }
     @Test
-    public void should_return_car_ticket_when_parking_given_car_while_parking_lot_1_is_at_max_capacity_to_parking_boy(){
+    public void should_return_size_slot_of_parking_lot2_when_parking_given_car_while_parking_lot_1_is_at_max_capacity_to_parking_boy(){
         //GIVEN
         ParkingLot parkingLot1 = new ParkingLot(1);
         ParkingLot parkinglot2 = new ParkingLot();
@@ -148,8 +148,26 @@ class ParkingBoyTest {
         parkingBoy.park(car1);
 
         //WHEN
-        ParkingTicket ticket = parkingBoy.park(car2);
+        parkingBoy.park(car2);
         //THEN
-        assertNotNull(ticket);
+        assertEquals(1, parkinglot2.getTicketCarMap().size());
+    }
+    @Test
+    public void should_return_car_when_parking_given_ticket_for_car_while_parking_lot_1_is_at_max_capacity_to_parking_boy(){
+        //GIVEN
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(parkingLot1);
+        parkingLots.add(parkingLot2);
+        Car car1 = new Car();
+        Car car2 = new Car();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        parkingBoy.park(car1);
+        ParkingTicket ticket = parkingBoy.park(car2);
+        //WHEN
+        Car fetchedCar = parkingBoy.fetch(ticket);
+        //THEN
+        assertEquals(car2,fetchedCar);
     }
 }
