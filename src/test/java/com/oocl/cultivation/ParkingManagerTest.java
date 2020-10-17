@@ -102,4 +102,34 @@ class ParkingManagerTest {
         //THEN
         assertEquals(car,fetchedCar);
     }
+    @Test
+    public void should_return_a_null_when_command_park_given_parking_manager_with_a_car_to_specific_parking_boy_not_in_his_manager_list() {
+        //GIVEN
+        Car car = new Car();
+        List<ParkingLot> parkingLotForParkingBoy = new ArrayList<>();
+        parkingLotForParkingBoy.add(new ParkingLot());
+
+        List<ParkingLot> parkingLotForSmartParkingBoy = new ArrayList<>();
+        parkingLotForSmartParkingBoy.add(new ParkingLot());
+
+        List<ParkingLot> parkingLotForSuperSmartParkingBoy = new ArrayList<>();
+        parkingLotForSuperSmartParkingBoy.add(new ParkingLot());
+
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotForParkingBoy);
+        ParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotForSmartParkingBoy);
+        ParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLotForSuperSmartParkingBoy);
+        List<ParkingBoy> parkingBoys = Arrays.asList(parkingBoy, superSmartParkingBoy,smartParkingBoy);
+
+        List<ParkingLot> parkingLotForParkingManager = new ArrayList<>();
+        parkingLotForParkingManager.add(new ParkingLot());
+
+        ParkingManager parkingManager = new ParkingManager(parkingLotForParkingManager);
+        parkingManager.setManageList(parkingBoys);
+        //WHEN
+        ParkingTicket parkingTicket = parkingManager.commandPark(new ParkingBoy(parkingLotForParkingBoy), car);
+
+        //THEN
+        assertNull(parkingTicket);
+    }
+
 }
