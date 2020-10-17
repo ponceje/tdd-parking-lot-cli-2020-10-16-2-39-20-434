@@ -2,8 +2,10 @@ package com.oocl.cultivation;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 
 public class ParkingBoy {
     public static final String PLEASE_PROVIDE_YOUR_PARKING_TICKET = "Please provide your parking ticket";
@@ -30,6 +32,7 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket) throws RuntimeException {
+//        ParkingLot lot = parkingLotList.stream().filter(c -> c.getTickatCarMapSize()!=c.getMax()).findAny().get();
         if (parkingTicket != null){
             for (ParkingLot lot: parkingLotList) {
                 if(lot.getTicketCarMap().containsKey(parkingTicket)){

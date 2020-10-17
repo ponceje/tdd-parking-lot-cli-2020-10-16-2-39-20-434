@@ -36,7 +36,8 @@ public class ParkingLot {
     public int getMax(){
         return max;
     }
-    public int getRate(){
-        return ticketCarMap.size()/max;
+    public float getRate(){
+        float empty = max-ticketCarMap.size();
+        return (empty*100)/max;
     }
 }
