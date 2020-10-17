@@ -19,15 +19,20 @@ public class ParkingManager extends ParkingBoy{
     }
 
     public ParkingTicket commandPark(ParkingBoy parkingBoy, Car car) {
-        ParkingTicket parkingTicket= parkingBoy.park(car);
-        return parkingTicket;
+        if(isContains(parkingBoy)){
+            return parkingBoy.park(car);
+        }
+        return null;
     }
 
     public Car commandFetch(ParkingBoy parkingBoy, ParkingTicket parkingTicket) {
-        if(manageList.contains(parkingBoy)){
+        if(isContains(parkingBoy)){
             return parkingBoy.fetch(parkingTicket);
         }
         return null;
     }
 
+    private boolean isContains(ParkingBoy parkingBoy) {
+        return manageList.contains(parkingBoy);
+    }
 }
