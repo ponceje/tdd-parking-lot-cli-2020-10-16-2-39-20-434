@@ -243,4 +243,88 @@ class ParkingManagerTest {
         //THEN
         assertSame(car, fetchedCar);
     }
+    @Test
+    public void should_return_exception_when_fetching_given_manager_has_wrong_parking_ticket_to_parking_boy(){
+        //GIVEN
+        Car car = new Car();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        parkingBoy.park(car);
+        ParkingTicket wrongTicket = new ParkingTicket();
+
+        ParkingManager parkingManager = new ParkingManager(parkingLots);
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        parkingManager.setManageList(parkingBoys);
+
+        //WHEN
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                ()->{parkingManager.commandFetch(parkingBoy,wrongTicket); });
+        //THEN
+        assertSame("Unrecognize parking ticket", exception.getMessage());
+    }
+    @Test
+    public void should_return_exception_when_fetching_given_manager_has_no_ticket_to_parking_boy(){
+        //GIVEN
+        Car car = new Car();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        parkingBoy.park(car);
+
+        ParkingManager parkingManager = new ParkingManager(parkingLots);
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        parkingManager.setManageList(parkingBoys);
+
+        //WHEN
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                ()->{parkingManager.commandFetch(parkingBoy,null); });
+        //THEN
+        assertSame("Please provide your parking ticket", exception.getMessage());
+    }
+    @Test
+    public void should_return_exception_when_fetching_given_manager_has_used_parking_ticket_to_parking_boy(){
+        //GIVEN
+        Car car = new Car();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot());
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        ParkingTicket ticket = parkingBoy.park(car);
+        parkingBoy.fetch(ticket);
+
+        ParkingManager parkingManager = new ParkingManager(parkingLots);
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        parkingManager.setManageList(parkingBoys);
+
+        //WHEN
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                ()->{parkingManager.commandFetch(parkingBoy,ticket); });
+        //THEN
+        assertSame("Unrecognize parking ticket", exception.getMessage());
+    }
+    @Test
+    public void should_return_exception_when_parking_given_manager_has_car_while_parking_lot_is_at_max_capacity_to_parking_boy(){
+        //GIVEN
+        Car car1 = new Car();
+        Car car2 = new Car();
+        List<ParkingLot> parkingLots = new ArrayList<>();
+        parkingLots.add(new ParkingLot(1));
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        parkingBoy.park(car1);
+
+        ParkingManager parkingManager = new ParkingManager(parkingLots);
+        List<ParkingBoy> parkingBoys = new ArrayList<>();
+        parkingBoys.add(parkingBoy);
+        parkingManager.setManageList(parkingBoys);
+
+        //WHEN
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                ()->{parkingManager.commandPark(parkingBoy,car2); });
+        //THEN
+        assertSame("Not enough position", exception.getMessage());
+    }
+
 }
