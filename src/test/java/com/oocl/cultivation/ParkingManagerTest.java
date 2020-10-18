@@ -168,10 +168,10 @@ class ParkingManagerTest {
     public void should_parking_lot_size_1_when_command_parking_given_car_while_parking_lot_1_is_at_max_capacity_from_parking_manager_to_smart_parking_boy(){
         //GIVEN
         ParkingLot parkingLot1 = new ParkingLot(2);
-        ParkingLot parkinglot2 = new ParkingLot(2);
+        ParkingLot parkingLot2 = new ParkingLot(2);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot1);
-        parkingLots.add(parkinglot2);
+        parkingLots.add(parkingLot2);
         Car car1 = new Car();
         Car car2 = new Car();
         ParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
@@ -186,16 +186,16 @@ class ParkingManagerTest {
         //WHEN
         parkingManager.commandPark(smartParkingBoy,car2);
         //THEN
-        assertEquals(1,parkinglot2.getTicketCarMap().size());
+        assertEquals(1,parkingLot2.getTicketCarMap().size());
     }
     @Test
     public void should_return_correct_parking_lot_size_when_command_parking_given_car_while_parking_lot_1_is_at_max_capacity_from_parking_manager_to_super_smart_parking_boy(){
         //GIVEN
         ParkingLot parkingLot1 = new ParkingLot(10);
-        ParkingLot parkinglot2 = new ParkingLot(20);
+        ParkingLot parkingLot2 = new ParkingLot(20);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot1);
-        parkingLots.add(parkinglot2);
+        parkingLots.add(parkingLot2);
         ParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
 
         List<ParkingBoy> parkingBoys = new ArrayList<>();
@@ -212,7 +212,7 @@ class ParkingManagerTest {
         parkingManager.commandPark(superSmartParkingBoy,new Car());
         //THEN
         assertEquals(3,parkingLot1.getTicketCarMap().size());
-        assertEquals(5,parkinglot2.getTicketCarMap().size());
+        assertEquals(5,parkingLot2.getTicketCarMap().size());
     }
     @Test
     public void should_return_a_parking_ticket_when_parking_given_a_car_to_parking_manager() {
