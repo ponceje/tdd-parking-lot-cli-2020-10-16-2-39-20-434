@@ -13,17 +13,13 @@ public class ParkingBoy {
     }
 
     public ParkingTicket park(Car car) {
-        ParkingLot lot = getParkinglot(parkingLotList);
+        ParkingLot lot = getParkingLot(parkingLotList);
         return lot.park(car);
     }
 
-    public ParkingLot getParkinglot(List<ParkingLot> parkingLotList) {
-        for(ParkingLot lot: parkingLotList){
-            if(lot.getTicketCarMap().size()!=lot.getMax()){
-                return lot;
-            }
-        }
-        throw new RuntimeException(NOT_ENOUGH_POSITION);
+    public ParkingLot getParkingLot(List<ParkingLot> parkingLotList) {
+        return parkingLotList.stream().filter(lot -> lot.getTicketCarMap().size()!=lot.getMax()).findAny()
+                .orElseThrow(() -> new RuntimeException(NOT_ENOUGH_POSITION));
     }
 
     public Car fetch(ParkingTicket parkingTicket) throws RuntimeException {

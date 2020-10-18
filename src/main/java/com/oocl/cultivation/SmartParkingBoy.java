@@ -10,7 +10,7 @@ public class SmartParkingBoy extends ParkingBoy{
     }
 
     @Override
-    public ParkingLot getParkinglot(List<ParkingLot> parkingLotList) {
+    public ParkingLot getParkingLot(List<ParkingLot> parkingLotList) {
         return  parkingLotList.stream().max(Comparator.comparing(ParkingLot::getEmpty))
                 .filter(c -> c.getTickatCarMapSize()!=c.getMax())
                 .orElseThrow(() -> new RuntimeException(NOT_ENOUGH_POSITION));
