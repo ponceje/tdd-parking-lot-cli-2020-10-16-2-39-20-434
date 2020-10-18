@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,10 +16,10 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
 
         //WHEN
-        ParkingTicket ticket = smartParkingBoy.park(car);
+        ParkingTicket ticket = superSmartParkingBoy.park(car);
 
         //THEN
         assertNotNull(ticket);
@@ -28,11 +30,11 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
-        ParkingTicket ticket = smartParkingBoy.park(car);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        ParkingTicket ticket = superSmartParkingBoy.park(car);
 
         //WHEN
-        Car fetchedCar = smartParkingBoy.fetch(ticket);
+        Car fetchedCar = superSmartParkingBoy.fetch(ticket);
 
         //THEN
         assertSame(car, fetchedCar);
@@ -44,13 +46,13 @@ class SuperSmartParkingBoyTest {
         Car car2 = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
-        ParkingTicket ticket1 = smartParkingBoy.park(car1);
-        ParkingTicket ticket2 = smartParkingBoy.park(car2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        ParkingTicket ticket1 = superSmartParkingBoy.park(car1);
+        ParkingTicket ticket2 = superSmartParkingBoy.park(car2);
 
         //WHEN
-        Car fetchedCar1 = smartParkingBoy.fetch(ticket1);
-        Car fetchedCar2 = smartParkingBoy.fetch(ticket2);
+        Car fetchedCar1 = superSmartParkingBoy.fetch(ticket1);
+        Car fetchedCar2 = superSmartParkingBoy.fetch(ticket2);
 
         //THEN
         assertSame(car1, fetchedCar1);
@@ -62,13 +64,13 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
-        smartParkingBoy.park(car);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        superSmartParkingBoy.park(car);
         ParkingTicket wrongTicket = new ParkingTicket();
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.fetch(wrongTicket); });
+                ()->{superSmartParkingBoy.fetch(wrongTicket); });
         //THEN
         assertSame("Unrecognize parking ticket", exception.getMessage());
     }
@@ -78,12 +80,12 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
-        smartParkingBoy.park(car);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        superSmartParkingBoy.park(car);
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.fetch(null); });
+                ()->{superSmartParkingBoy.fetch(null); });
         //THEN
         assertSame("Please provide your parking ticket", exception.getMessage());
     }
@@ -93,12 +95,12 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
-        smartParkingBoy.park(car);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        superSmartParkingBoy.park(car);
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.fetch(); });
+                ()->{superSmartParkingBoy.fetch(); });
         //THEN
         assertSame("Please provide your parking ticket", exception.getMessage());
     }
@@ -108,13 +110,13 @@ class SuperSmartParkingBoyTest {
         Car car = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot());
-        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
-        ParkingTicket ticket = smartParkingBoy.park(car);
-        smartParkingBoy.fetch(ticket);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        ParkingTicket ticket = superSmartParkingBoy.park(car);
+        superSmartParkingBoy.fetch(ticket);
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.fetch(ticket); });
+                ()->{superSmartParkingBoy.fetch(ticket); });
         //THEN
         assertSame("Unrecognize parking ticket", exception.getMessage());
     }
@@ -125,12 +127,12 @@ class SuperSmartParkingBoyTest {
         Car car2 = new Car();
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(1));
-        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
-        smartParkingBoy.park(car1);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        superSmartParkingBoy.park(car1);
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.park(car2); });
+                ()->{superSmartParkingBoy.park(car2); });
         //THEN
         assertSame("Not enough position", exception.getMessage());
     }
@@ -138,31 +140,20 @@ class SuperSmartParkingBoyTest {
     public void should_return_car_ticket_when_parking_given_car_while_parking_lot_1_is_at_max_capacity_to_parking_boy(){
         //GIVEN
         ParkingLot parkingLot1 = new ParkingLot(10);
-        ParkingLot parkinglot2 = new ParkingLot(20);
+        ParkingLot parkingLot2 = new ParkingLot(20);
         List<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(parkingLot1);
-        parkingLots.add(parkinglot2);
-        Car car1 = new Car();
-        Car car2 = new Car();
-        Car car3 = new Car();
-        Car car4 = new Car();
-        Car car5 = new Car();
-        Car car6 = new Car();
-        Car car7 = new Car();
-        Car car8 = new Car();
-        SuperSmartParkingBoy smartParkingBoy = new SuperSmartParkingBoy(parkingLots);
-        smartParkingBoy.park(car1);
-        smartParkingBoy.park(car2);
-        smartParkingBoy.park(car3);
-        smartParkingBoy.park(car4);
-        smartParkingBoy.park(car5);
-        smartParkingBoy.park(car1);
-        smartParkingBoy.park(car6);
-        smartParkingBoy.park(car7);
+        parkingLots.add(parkingLot2);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
+        IntStream.range(0, 8).forEach(cars -> {
+            Car carsNew = new Car();
+            superSmartParkingBoy.park(carsNew);
+        });
+        Car car = new Car();
         //WHEN
-        smartParkingBoy.park(car8);
+        superSmartParkingBoy.park(car);
         //THEN
         assertEquals(3,parkingLot1.getTicketCarMap().size());
-        assertEquals(6,parkinglot2.getTicketCarMap().size());
+        assertEquals(6,parkingLot2.getTicketCarMap().size());
     }
 }
