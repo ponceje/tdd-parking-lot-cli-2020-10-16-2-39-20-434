@@ -27,14 +27,10 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket parkingTicket) throws RuntimeException {
-//        ParkingLot lot = parkingLotList.stream().filter(c -> c.getTickatCarMapSize()!=c.getMax()).findAny().get();
-        if (parkingTicket != null){
-            for (ParkingLot lot: parkingLotList) {
-                if(lot.getTicketCarMap().containsKey(parkingTicket)){
-                    return lot.fetch(parkingTicket);
-                }
-            }
-            throw new RuntimeException(UNRECOGNIZE_PARKING_TICKET);
+        if(parkingTicket != null){
+            ParkingLot parkingLot = parkingLotList.stream().filter(lot -> lot.getTicketCarMap().containsKey(parkingTicket)).findAny()
+                    .orElseThrow(() -> new RuntimeException(UNRECOGNIZE_PARKING_TICKET));
+            return  parkingLot.fetch(parkingTicket);
         }
         throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
     }
@@ -43,7 +39,4 @@ public class ParkingBoy {
         throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
     }
 
-    public List<ParkingLot> getParkingLotList(){
-        return parkingLotList;
-    }
 }
