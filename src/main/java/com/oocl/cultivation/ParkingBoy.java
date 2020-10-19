@@ -20,14 +20,14 @@ public class ParkingBoy {
 
     public ParkingLot getParkingLot(List<ParkingLot> parkingLotList) {
         return parkingLotList.stream().filter(lot -> lot.getTicketCarMap().size()!=lot.getMax()).findFirst()
-                .orElseThrow(() -> new RuntimeException(NOT_ENOUGH_POSITION));
+                .orElseThrow(() -> new NotEnoughtPositionException(NOT_ENOUGH_POSITION));
     }
 
     public Car fetch(ParkingTicket parkingTicket) throws RuntimeException {
-        Optional.ofNullable(parkingTicket).orElseThrow(() -> new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET));
+        Optional.ofNullable(parkingTicket).orElseThrow(() -> new NoTicketException(PLEASE_PROVIDE_YOUR_PARKING_TICKET));
         return  parkingLotList.stream().filter(lot -> lot.getTicketCarMap().containsKey(parkingTicket))
                 .map(lot -> lot.fetch(parkingTicket)).findFirst()
-                .orElseThrow(() -> new RuntimeException(UNRECOGNIZE_PARKING_TICKET));
+                .orElseThrow(() -> new UnrecognizeParkingTicketException(UNRECOGNIZE_PARKING_TICKET));
     }
 
 
