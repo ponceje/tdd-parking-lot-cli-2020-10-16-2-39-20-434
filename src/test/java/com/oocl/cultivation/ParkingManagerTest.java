@@ -14,7 +14,6 @@ class ParkingManagerTest {
     @Test
     public void should_return_a_parking_boy_list_when_getting_manage_list_parking_given_parking_manager_adding_parking_boys() {
         //GIVEN
-        Car car = new Car();
         List<ParkingLot> parkingLotForParkingBoy = new ArrayList<>();
         parkingLotForParkingBoy.add(new ParkingLot());
 
@@ -260,7 +259,7 @@ class ParkingManagerTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{parkingManager.commandFetch(parkingBoy,wrongTicket); });
+                ()-> parkingManager.commandFetch(parkingBoy,wrongTicket));
         //THEN
         assertSame("Unrecognize parking ticket", exception.getMessage());
     }
@@ -279,8 +278,9 @@ class ParkingManagerTest {
         parkingManager.setManageList(parkingBoys);
 
         //WHEN
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{parkingManager.commandFetch(parkingBoy,null); });
+        RuntimeException exception;
+        exception = assertThrows(RuntimeException.class,
+                ()-> parkingManager.commandFetch(parkingBoy,null));
         //THEN
         assertSame("Please provide your parking ticket", exception.getMessage());
     }
@@ -301,7 +301,7 @@ class ParkingManagerTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{parkingManager.commandFetch(parkingBoy,ticket); });
+                ()-> parkingManager.commandFetch(parkingBoy,ticket));
         //THEN
         assertSame("Unrecognize parking ticket", exception.getMessage());
     }
@@ -322,7 +322,7 @@ class ParkingManagerTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{parkingManager.commandPark(parkingBoy,car2); });
+                ()-> parkingManager.commandPark(parkingBoy,car2));
         //THEN
         assertSame("Not enough position", exception.getMessage());
     }

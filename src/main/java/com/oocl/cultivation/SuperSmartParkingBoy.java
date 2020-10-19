@@ -12,7 +12,7 @@ public class SuperSmartParkingBoy extends ParkingBoy{
     @Override
     public ParkingLot getParkingLot(List<ParkingLot> parkingLotList) {
         return parkingLotList.stream().max(Comparator.comparing(ParkingLot::getRate))
-                .filter(c -> c.getTickatCarMapSize()!=c.getMax())
+                .filter(c -> c.getTicketCarMapSize()!=c.getMax())
                 .orElseThrow(() -> new RuntimeException(NOT_ENOUGH_POSITION));
     }
 }

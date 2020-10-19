@@ -1,12 +1,13 @@
 package com.oocl.cultivation;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
     private int max = 10;
     private final Map<ParkingTicket, Car> ticketCarMap = new HashMap<>();
-
     public ParkingLot() { }
 
     public ParkingLot(int max) {
@@ -29,7 +30,7 @@ public class ParkingLot {
         return ticketCarMap;
     }
 
-    public int getTickatCarMapSize(){
+    public int getTicketCarMapSize(){
         return ticketCarMap.size();
     }
 
@@ -37,12 +38,9 @@ public class ParkingLot {
         return max;
     }
 
-    public float getRate(){
-        float empty = max-ticketCarMap.size();
-        return (empty/max)*100;
+    public BigDecimal getRate(){
+        return BigDecimal.valueOf(getEmpty()).divide(BigDecimal.valueOf(max),2, RoundingMode.HALF_EVEN).multiply(BigDecimal.valueOf(100));
     }
 
-    public int getEmpty(){
-        return  max-ticketCarMap.size();
-    }
+    public int getEmpty(){ return  max-getTicketCarMapSize(); }
 }

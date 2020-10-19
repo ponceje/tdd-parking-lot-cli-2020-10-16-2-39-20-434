@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,7 +69,7 @@ class SuperSmartParkingBoyTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{superSmartParkingBoy.fetch(wrongTicket); });
+                ()-> superSmartParkingBoy.fetch(wrongTicket));
         //THEN
         assertSame("Unrecognize parking ticket", exception.getMessage());
     }
@@ -85,22 +84,7 @@ class SuperSmartParkingBoyTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{superSmartParkingBoy.fetch(null); });
-        //THEN
-        assertSame("Please provide your parking ticket", exception.getMessage());
-    }
-    @Test
-    public void should_return_exception_when_fetching_given_empty_ticket_to_parking_boy(){
-        //GIVEN
-        Car car = new Car();
-        List<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(new ParkingLot());
-        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLots);
-        superSmartParkingBoy.park(car);
-
-        //WHEN
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{superSmartParkingBoy.fetch(); });
+                ()-> superSmartParkingBoy.fetch(null));
         //THEN
         assertSame("Please provide your parking ticket", exception.getMessage());
     }
@@ -116,7 +100,7 @@ class SuperSmartParkingBoyTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{superSmartParkingBoy.fetch(ticket); });
+                ()-> superSmartParkingBoy.fetch(ticket));
         //THEN
         assertSame("Unrecognize parking ticket", exception.getMessage());
     }
@@ -132,7 +116,7 @@ class SuperSmartParkingBoyTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{superSmartParkingBoy.park(car2); });
+                ()-> superSmartParkingBoy.park(car2));
         //THEN
         assertSame("Not enough position", exception.getMessage());
     }

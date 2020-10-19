@@ -1,6 +1,5 @@
 package com.oocl.cultivation;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +7,7 @@ public class ParkingBoy {
     public static final String PLEASE_PROVIDE_YOUR_PARKING_TICKET = "Please provide your parking ticket";
     public static final String NOT_ENOUGH_POSITION = "Not enough position";
     public static final String UNRECOGNIZE_PARKING_TICKET = "Unrecognize parking ticket";
-    private List<ParkingLot> parkingLotList;
+    private final List<ParkingLot> parkingLotList;
 
     public ParkingBoy(List<ParkingLot> parkingLotList){
         this.parkingLotList = parkingLotList;
@@ -26,13 +25,10 @@ public class ParkingBoy {
 
     public Car fetch(ParkingTicket parkingTicket) throws RuntimeException {
         Optional.ofNullable(parkingTicket).orElseThrow(() -> new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET));
-        ParkingLot parkingLot = parkingLotList.stream().filter(lot -> lot.getTicketCarMap().containsKey(parkingTicket)).findAny()
+        return  parkingLotList.stream().filter(lot -> lot.getTicketCarMap().containsKey(parkingTicket))
+                .map(lot -> lot.fetch(parkingTicket)).findFirst()
                 .orElseThrow(() -> new RuntimeException(UNRECOGNIZE_PARKING_TICKET));
-        return  parkingLot.fetch(parkingTicket);
     }
 
-    public Car fetch(){
-        throw new RuntimeException(PLEASE_PROVIDE_YOUR_PARKING_TICKET);
-    }
 
 }

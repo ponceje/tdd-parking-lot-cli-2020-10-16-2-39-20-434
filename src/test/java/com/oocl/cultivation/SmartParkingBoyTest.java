@@ -68,7 +68,7 @@ class SmartParkingBoyTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.fetch(wrongTicket); });
+                ()-> smartParkingBoy.fetch(wrongTicket));
         //THEN
         assertSame("Unrecognize parking ticket", exception.getMessage());
     }
@@ -83,22 +83,7 @@ class SmartParkingBoyTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.fetch(null); });
-        //THEN
-        assertSame("Please provide your parking ticket", exception.getMessage());
-    }
-    @Test
-    public void should_return_exception_when_fetching_given_empty_ticket_to_parking_boy(){
-        //GIVEN
-        Car car = new Car();
-        List<ParkingLot> parkingLots = new ArrayList<>();
-        parkingLots.add(new ParkingLot());
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLots);
-        smartParkingBoy.park(car);
-
-        //WHEN
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.fetch(); });
+                ()-> smartParkingBoy.fetch(null));
         //THEN
         assertSame("Please provide your parking ticket", exception.getMessage());
     }
@@ -114,7 +99,7 @@ class SmartParkingBoyTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.fetch(ticket); });
+                ()-> smartParkingBoy.fetch(ticket));
         //THEN
         assertSame("Unrecognize parking ticket", exception.getMessage());
     }
@@ -130,7 +115,7 @@ class SmartParkingBoyTest {
 
         //WHEN
         RuntimeException exception = assertThrows(RuntimeException.class,
-                ()->{smartParkingBoy.park(car2); });
+                ()-> smartParkingBoy.park(car2));
         //THEN
         assertSame("Not enough position", exception.getMessage());
     }
